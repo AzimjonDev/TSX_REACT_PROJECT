@@ -1,0 +1,13 @@
+.continer {
+  display: flex;
+  flex-direction: column;
+  button {
+    width: 100px;
+    height: 23px;
+    border-radius: 10px;
+    outline: none;
+    border-style: none;
+    margin-top: 10px;
+    background: yellowgreen;
+  }
+}
