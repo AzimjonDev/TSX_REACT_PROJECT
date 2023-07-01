@@ -75,33 +75,35 @@ export default class App extends Component<{}, AppState> {
 	checkwin = () => {
 		const win = this.checkWinner();
 		if (win) {
-			// this.state.game = false;
 			this.setState({ game: false });
 			let value = this.state.nextPlayer === "X" ? "O" : "X";
 			return <p style={{ color: "green" }}>{value} is winner 🏆</p>;
 		}
 		return <p>No winner !!!</p>;
 	};
+
+
 	handleHistores = (idx: number) => {
 		const { histories } = this.state;
 		const board = [...histories[idx]];
+		this.setState({ game: true });
 		this.setStatStorage({ board, currentIdx: idx });
 	};
 	render() {
 		const { board, nextPlayer, histories, currentIdx } = this.state;
 		return (
-			<main>
-				<div className="container d-flex " style={{ gap: 10 }}>
-					<Board board={board} onCell={this.handleCell} />
+			<div className="container d-flex " style={{ gap: 10 }}>
+				<Board board={board} onCell={this.handleCell} />
 
-					<Histories
-						onHistory={this.handleHistores}
-						currentIdx={currentIdx}
-						nextPlayer={nextPlayer}
-						histories={histories}
-					/>
-				</div>
-			</main>
+				<Histories
+					onHistory={this.handleHistores}
+					currentIdx={currentIdx}
+					nextPlayer={nextPlayer}
+					histories={histories}
+				/>
+				<p className="winnerPlayer">{this.checkwin()
+				}</p>
+			</div>
 		);
 	}
 }
