@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import "./game.scss";
-// import dice1 from "./dice/dice-1.png";
-// import dice2 from "./dice/dice-2.png";
-// import dice3 from "./dice/dice-3.png";
-// import dice4 from "./dice/dice-4.png";
-// import dice5 from "./dice/dice-5.png";
-// import dice6 from "./dice/dice-6.png";
+import dice1 from "./dice/dice-1.png";
+import dice2 from "./dice/dice-2.png";
+import dice3 from "./dice/dice-3.png";
+import dice4 from "./dice/dice-4.png";
+import dice5 from "./dice/dice-5.png";
+import dice6 from "./dice/dice-6.png";
 
 export interface Score {
 	RandomNumber: number | string;
 	leftScore: number;
 	rightScore: number;
-	imgSrc: string | null;
+	imgSrc: any;
 	imgRand: string | null;
 }
 export default class Game extends Component<Score> {
@@ -19,17 +19,18 @@ export default class Game extends Component<Score> {
 		RandomNumber: null,
 		leftScore: 0,
 		rightScore: 0,
-		imgSrc: null,
+		imgSrc: 1,
 		imgRand: null,
 	};
 	randNumber = () => {
-		let randImg = `./dice/dice-${Math.floor(Math.random() * 6) + 1}.png`;
+		let randImg = Math.floor(Math.random() * 6) + 1;
 		this.setState({ imgSrc: randImg });
 		console.log(randImg);
 	};
 	render() {
 		const { imgSrc } = this.state;
-	
+		console.log(imgSrc);
+
 		return (
 			<div>
 				<main>
@@ -61,7 +62,23 @@ export default class Game extends Component<Score> {
 							</p>
 						</div>
 					</section>
-					<img src={this.state.imgSrc} alt="Playing dice" className="dice " />
+					<img
+						src={`${
+							this.state.imgSrc === 1
+								? dice1
+								: this.state.imgSrc === 2
+								? dice2
+								: this.state.imgSrc === 3
+								? dice3
+								: this.state.imgSrc === 4
+								? dice4
+								: this.state.imgSrc === 5
+								? dice5
+								: dice6
+						}`}
+						alt="Playing dice"
+						className="dice "
+					/>
 					<button className="btn btn--new">🔄 Yangi o'yin</button>
 					<button onClick={this.randNumber} className="btn btn--roll">
 						🎲 Toshni tashlash
